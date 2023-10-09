@@ -188,7 +188,8 @@ async function FindExperience(req,res){
 //Querry: Find3
 async function Find3(req,res){
     try{
-      const data = await User.find({overallExp:{$gt:"1"}},{yearGrad:{$gt:"2015"}})
+      const query = [{overallExp:{$gt:"1"}},{yearGrad:{$gt:"2015"}}]
+      const data = await User.find()
     res.status(200).send({user:data})
     }
     catch(err){
@@ -199,7 +200,7 @@ async function Find3(req,res){
 // Querry : Update Salary
 async function updateSalary(req,res){
     try{
-        const data = await User.findOneAndUpdate({"salary":"35000"},{$set :{"salary":"40000"}})
+        const data = await User.updateMany({"salary":"35000"},{$set :{"salary":"40000"}})
         res.status(200).send({user:data})
     }
     catch(err){
@@ -209,7 +210,7 @@ async function updateSalary(req,res){
 // Querry : delete
 async function deleteQuerry(req,res){
     try{
-        const data = await User.findOneAndDelete({"lastCompany":"Y"})
+        const data = await User.deleteMany({"lastCompany":"Y"})
         res.status(200).send({user:data})
     }
     catch(err){
